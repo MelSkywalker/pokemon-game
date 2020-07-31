@@ -1,0 +1,78 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "pokemap-01.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "E:/projects/tiled-project/mapa.tmx#poke-tileset": {
+            "scaleInDock": 1
+        },
+        "E:/projects/tiled-project/poke-map.tmx#poke-tileset": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "E:/projects/tiled-project/poke-tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "map.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 106.66666666666669,
+                "y": 91.33333333333337
+            }
+        },
+        "pokemap-01.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 222,
+                "y": 142.5
+            }
+        },
+        "pokemap-01.tmx#poke-tileset-advance": {
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "pokemap-01.tmx#water-tileset": {
+            "scaleInDock": 2
+        }
+    },
+    "frame.defaultDuration": 150,
+    "lastUsedTilesetExportFilter": "Todos los archivos (*)",
+    "map.height": 20,
+    "map.lastUsedExportFilter": "Archivos de mapa JSON (*.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 25,
+    "openFiles": [
+        "pokemap-01.tmx"
+    ],
+    "project": "poke.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "map.tmx",
+        "pokemap-01.tmx",
+        "E:/projects/tiled-project/poke-map.tmx",
+        "E:/projects/tiled-project/mapa.tmx",
+        "E:/projects/tiled-project/poke-tileset.tsx"
+    ],
+    "resizeMap.removeObjects": true,
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
