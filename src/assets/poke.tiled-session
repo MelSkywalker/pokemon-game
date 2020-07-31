@@ -33,10 +33,10 @@
         },
         "pokemap-01.tmx": {
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 222,
-                "y": 142.5
+                "x": 216.5,
+                "y": 142
             }
         },
         "pokemap-01.tmx#poke-tileset-advance": {
@@ -62,8 +62,8 @@
     "project": "poke.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "map.tmx",
         "pokemap-01.tmx",
+        "map.tmx",
         "E:/projects/tiled-project/poke-map.tmx",
         "E:/projects/tiled-project/mapa.tmx",
         "E:/projects/tiled-project/poke-tileset.tsx"
