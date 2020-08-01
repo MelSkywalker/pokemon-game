@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="25" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="4">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="25" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="5">
  <editorsettings>
   <chunksize width="64" height="64"/>
   <export target="pokemap-01.json" format="json"/>
@@ -40353,6 +40353,9 @@
  </layer>
  <objectgroup id="9" name="Objects">
   <object id="3" name="Spawn Point" x="96.5" y="304.5">
+   <point/>
+  </object>
+  <object id="4" name="NPC Girl Spawn Point" x="47.5" y="48">
    <point/>
   </object>
  </objectgroup>

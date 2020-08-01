@@ -73,6 +73,18 @@
                  "width":0,
                  "x":96.5,
                  "y":304.5
+                }, 
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"NPC Girl Spawn Point",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":47.5,
+                 "y":48
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -81,7 +93,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":4,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.1",
