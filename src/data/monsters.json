@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "name": "01",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    },
+    {
+        "id": 2,
+        "name": "02",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    },
+    {
+        "id": 3,
+        "name": "03",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    },
+    {
+        "id": 4,
+        "name": "04",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    },
+    {
+        "id": 5,
+        "name": "05",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    },
+    {
+        "id": 6,
+        "name": "06",
+        "sprite": "image",
+        "type": [],
+        "multipliers": [],
+        "weaknesses": [],
+        "moves": [],
+        "base": {
+            "hp": 45,
+            "attack": 49,
+            "defense": 49,
+            "specialAttack": 65,
+            "specialDefense": 65,
+            "speed": 45
+        },
+        "spawns": "spawns"
+    }
+]

@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import worldScene from './scenes/worldScene';
+import battleScene from './scenes/battleScene';
 
 const config = {
     type: Phaser.AUTO,
-    width: 400,
+    width: 480,
     height: 320,
     parent: 'game-container',
     scene: [worldScene],
@@ -13,7 +14,9 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }
+            gravity: { y: 0 },
+            debug: true,
+            debugVelocityColor: 0xeb4034
         }
     }
 }

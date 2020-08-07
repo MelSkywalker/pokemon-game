@@ -23,6 +23,14 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "battle.tmx": {
+            "scale": 2.4554435483870964,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 230.91551030462276,
+                "y": 160.0525494703999
+            }
+        },
         "map.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
@@ -33,9 +41,9 @@
         },
         "pokemap-01.tmx": {
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 216.5,
+                "x": 213,
                 "y": 142
             }
         },
@@ -45,17 +53,24 @@
         },
         "pokemap-01.tmx#water-tileset": {
             "scaleInDock": 2
+        },
+        "tiles/BattleBackgrounds.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "frame.defaultDuration": 150,
     "lastUsedTilesetExportFilter": "Todos los archivos (*)",
+    "loadedWorlds": [
+        "E:/projects/phaser/poke_game/src/assets/battle.world"
+    ],
     "map.height": 20,
     "map.lastUsedExportFilter": "Archivos de mapa JSON (*.json)",
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": null,
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 25,
+    "map.width": 30,
     "openFiles": [
         "pokemap-01.tmx"
     ],
@@ -63,13 +78,15 @@
     "property.type": "bool",
     "recentFiles": [
         "pokemap-01.tmx",
+        "battle.tmx",
+        "tiles/BattleBackgrounds.tsx",
         "map.tmx",
         "E:/projects/tiled-project/poke-map.tmx",
         "E:/projects/tiled-project/mapa.tmx",
         "E:/projects/tiled-project/poke-tileset.tsx"
     ],
     "resizeMap.removeObjects": true,
-    "tileset.embedInMap": true,
+    "tileset.embedInMap": false,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
