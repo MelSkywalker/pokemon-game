@@ -7,7 +7,7 @@ const config = {
     width: 480,
     height: 320,
     parent: 'game-container',
-    scene: [worldScene],
+    scene: [battleScene],
     scale: {
         zoom: 2
     },

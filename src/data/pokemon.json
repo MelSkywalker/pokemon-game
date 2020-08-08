@@ -1,0 +1,150 @@
+[
+    {
+        "id": 1,
+        "name": "Bulbasaur",
+        "sprite": "image",
+        "type": [
+            "Grass",
+            "Poison"
+        ],
+        "multipliers": [
+            1.58
+        ],
+        "weaknesses": [
+            "Fire",
+            "Ice",
+            "Flying",
+            "Psychic"
+        ],
+        "base": {
+            "HP": 45,
+            "Attack": 49,
+            "Defense": 49,
+            "Sp. Attack": 65,
+            "Sp. Defense": 65,
+            "Speed": 45
+        },
+        "spawns": 69
+    },
+    {
+        "id": 2,
+        "name": "Charmander",
+        "sprite": "image",
+        "type": [
+            "Fire"
+        ],
+        "multipliers": [
+            1.65
+        ],
+        "weaknesses": [
+            "Water",
+            "Ground",
+            "Rock"
+        ],
+        "base": {
+            "HP": 39,
+            "Attack": 52,
+            "Defense": 43,
+            "Sp. Attack": 60,
+            "Sp. Defense": 50,
+            "Speed": 65
+        },
+        "spawns": 25.3
+    },
+    {
+        "id": 3,
+        "name": "Squirtle",
+        "sprite": "image",
+        "type": [
+            "Water"
+        ],
+        "multipliers": [2.1],
+        "weaknesses": [
+            "Electric",
+            "Grass"
+        ],
+        "base": {
+            "HP": 44,
+            "Attack": 48,
+            "Defense": 65,
+            "Sp. Attack": 50,
+            "Sp. Defense": 64,
+            "Speed": 43
+        },
+        "spawns": 58
+    },
+    {
+        "id": 4,
+        "name": "Pikachu",
+        "sprite": "image",
+        "type": [
+            "Electric"
+        ],
+        "multipliers": [2.34],
+        "weaknesses": [
+            "Ground"
+        ],
+        "base": {
+            "HP": 35,
+            "Attack": 55,
+            "Defense": 40,
+            "Sp. Attack": 50,
+            "Sp. Defense": 50,
+            "Speed": 90
+        },
+        "spawns": 21
+    },
+    {
+        "id": 5,
+        "name": "Gengar",
+        "sprite": "image",
+        "type": [
+            "Ghost",
+            "Poison"
+        ],
+        "multipliers": [],
+        "weaknesses": [
+            "Ground",
+            "Psychic",
+            "Ghost",
+            "Dark"
+        ],
+        "moves": [
+            "Shadow Ball",
+            "Lick"
+        ],
+        "base": {
+            "HP": 60,
+            "Attack": 65,
+            "Defense": 60,
+            "Sp. Attack": 130,
+            "Sp. Defense": 75,
+            "Speed": 110
+        },
+        "spawns": 67
+    },
+    {
+        "id": 6,
+        "name": "Eevee",
+        "sprite": "image",
+        "type": [
+            "Normal"
+        ],
+        "multipliers": [
+            2.02,
+            2.64
+        ],
+        "weaknesses": [
+            "Fighting"
+        ],
+        "base": {
+            "HP": 55,
+            "Attack": 55,
+            "Defense": 50,
+            "Sp. Attack": 45,
+            "Sp. Defense": 65,
+            "Speed": 55
+        },
+        "spawns": 27
+    }
+]
