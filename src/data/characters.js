@@ -12,13 +12,21 @@ export const trainers =
                             "name": "Vine Whip",
                             "pp": 25,
                             "currentPp": 25
-                            
                         },
                         {
-                            "name": "Razor Leat",
+                            "name": "Scratch",
                             "pp": 25,
                             "currentPp": 25
-                            
+                        },
+                        {
+                            "name": "Karate Chop",
+                            "pp": 15,
+                            "currentPp": 15
+                        },
+                        {
+                            "name": "Fire Punch",
+                            "pp": 30,
+                            "currentPp": 30
                         }
                     ] 
                 },
@@ -37,6 +45,18 @@ export const trainers =
                             "name": "Flame Wheel",
                             "pp": 15,
                             "currentPp": 15
+                            
+                        },
+                        {
+                            "name": "",
+                            "pp": '',
+                            "currentPp": ''
+                            
+                        },
+                        {
+                            "name": "",
+                            "pp": '',
+                            "currentPp": ''
                             
                         }
                     ]

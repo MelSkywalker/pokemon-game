@@ -3,7 +3,7 @@ import { trainers } from "../data/characters";
 import pokemon from "../data/pokemon.json";
 import moves from "../data/moves.json";
 
-import battleFont from '../assets/font/battle-font.png';
+import battleFont from '../assets/font/battle-font-g.png';
 import battleFontMeta from '../assets/font/battle-font.json';
 
 import battleBG from '../assets/battleBG01.png';
@@ -21,6 +21,14 @@ export default class battleScene extends Phaser.Scene {
         super(config);
         this.pokemonA;
         this.pokemonB;
+        this.currentA;
+        this.currentB;
+        this.playerPokemonArray;
+        this.npcPokemonArray;
+        this.player;
+        this.ppText;
+        this.typeText;
+        this.attack;
     }
 
     preload() {
@@ -37,44 +45,52 @@ export default class battleScene extends Phaser.Scene {
 
     create() {
         const bg = this.add.image(0, 0, 'battleBG').setOrigin(0).setScale(2);
-        const battleMenu = this.add.image(240, 225, 'battleMenu').setOrigin(0).setScale(2).setDepth(0).setVisible(true);
-        const fightBtn = this.add.sprite(270, 245, 'battleButtons', 0).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
-        const bagBtn = this.add.sprite(370, 245, 'battleButtons', 1).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
-        const pokemonBtn = this.add.sprite(270, 275, 'battleButtons', 2).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
-        const runBtn = this.add.sprite(370, 275, 'battleButtons', 3).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
-
         let fontConfig = this.cache.json.get('battle-font-json');
         this.cache.bitmapFont.add('battleFont', Phaser.GameObjects.RetroFont.Parse(this, fontConfig));
-        var txt = this.add.bitmapText(100, 100, 'battleFont', 'Adfaagp/05A');
+        
+        // Battle menu
+        this.battleMenu = this.add.image(240, 225, 'battleMenu').setOrigin(0).setScale(2).setDepth(0).setVisible(true);
+        this.fightBtn = this.add.sprite(270, 245, 'battleButtons', 0).setOrigin(0).setScale(2).setDepth(1).setVisible(true).setInteractive();
+        this.bagBtn = this.add.sprite(370, 245, 'battleButtons', 1).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
+        this.pokemonBtn = this.add.sprite(270, 275, 'battleButtons', 2).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
+        this.runBtn = this.add.sprite(370, 275, 'battleButtons', 3).setOrigin(0).setScale(2).setDepth(1).setVisible(true);
 
-        const fightMenu = this.add.image(0, 225, 'fightMenu').setOrigin(0).setScale(2).setDepth(0).setVisible(false);
+        // Fight menu
+        this.fightMenu = this.add.image(0, 225, 'fightMenu').setOrigin(0).setScale(2).setDepth(0).setVisible(false);
+        this.ppText = this.add.bitmapText(350, 250, 'battleFont', 'PP  /', 14, 0).setDepth(1).setVisible(false);
+        this.typeText = this.add.bitmapText(350, 280, 'battleFont', 'TYPE', 14, 0).setDepth(1).setVisible(false);
+        let move01 = this.add.bitmapText(30, 250, 'battleFont', '', 12, 0).setDepth(1).setVisible(false).setInteractive();
+        let move02 = this.add.bitmapText(175, 250, 'battleFont', '', 12, 0).setDepth(1).setVisible(false).setInteractive();
+        let move03 = this.add.bitmapText(30, 280, 'battleFont', '', 12, 0).setDepth(1).setVisible(false).setInteractive();
+        let move04 = this.add.bitmapText(175, 280, 'battleFont', '', 12, 0).setDepth(1).setVisible(false).setInteractive();
+        this.fightMenuButtons = this.physics.add.staticGroup([move01, move02, move03, move04], { classType: Phaser.Physics.Arcade.bitmapText });
+        // this.fightMenuButtons.getChildren().forEach((move, i) => {
+        //     let moveName = this.player.pokemon[pokemonIndex].moves[i].name;
+        //     move.on('pointerup', () => {
+        //         console.log(moveName + ' selected');
+        //     })
+        // })
 
         // Create trainers
-        const player = trainers.find(trainer => trainer.role === "player");
+        this.player = trainers.find(trainer => trainer.role === "player");
         const npc = trainers.find(trainer => trainer.role === "npc");
+        // One single turn system,pairs for one player and odd for the other ??
         let turn = 0;
 
         // Select pokemon
-        const playerPokemonArray = player.pokemon.filter(pokemon => pokemon.hp > 0);
-        const npcPokemonArray = this.shufflePokemon(npc.pokemon);
+        this.playerPokemonArray = this.player.pokemon.filter(pokemon => pokemon.hp > 0);
+        this.npcPokemonArray = this.shufflePokemon(npc.pokemon);
 
-        let currentA = playerPokemonArray[0];
-        let currentB = npcPokemonArray[0];
+        this.currentA = this.playerPokemonArray[0];
+        this.currentB = this.npcPokemonArray[0];
 
         // PokemonA.x :: -60 -> 120
         // PokemonB.x :: 540 -> 350
-        this.pokemonA = this.add.sprite(-60, 190, 'pokemonBack', (currentA.id - 1)).setScale(2);
-        this.pokemonB = this.add.sprite(540, 100, 'pokemonFront', (currentB.id - 1)).setScale(2);
+        this.pokemonA = this.add.sprite(-60, 190, 'pokemonBack', (this.currentA.id - 1)).setScale(2);
+        this.pokemonB = this.add.sprite(540, 100, 'pokemonFront', (this.currentB.id - 1)).setScale(2);
 
-        fightBtn.setInteractive();
-        fightBtn.on('pointerup', () => {
+        this.fightBtn.on('pointerup', () => {
             phase = 'fight menu';
-            battleMenu.setVisible(false);
-            fightBtn.setVisible(false);
-            bagBtn.setVisible(false);
-            pokemonBtn.setVisible(false);
-            runBtn.setVisible(false);
-            fightMenu.setVisible(true);
         })
 
     }
@@ -84,8 +100,18 @@ export default class battleScene extends Phaser.Scene {
             this.pokemonEntrance(this.pokemonA, 2);
             this.pokemonEntrance(this.pokemonB, 2);
         }
-
-        // if (phase === '')
+        if (phase === 'fight menu') {
+            this.battleMenu.setVisible(false);
+            this.fightBtn.setVisible(false);
+            this.bagBtn.setVisible(false);
+            this.pokemonBtn.setVisible(false);
+            this.runBtn.setVisible(false);
+            this.fightMenu.setVisible(true);
+            this.ppText.setVisible(true);
+            this.typeText.setVisible(true);
+            this.fightMenuButtons.setVisible(true);
+            this.createMoves(this.playerPokemonArray.indexOf(this.currentA));
+        }
     }
 
     shufflePokemon(array) {
@@ -94,41 +120,39 @@ export default class battleScene extends Phaser.Scene {
             .sort((a, b) => a.sort - b.sort)
             .map((a) => a.value);
     };
-
-
     pokemonEntrance(pokemon, speed) {
         if (pokemon == this.pokemonA && pokemon.x < 120) pokemon.x += speed;
         if (pokemon == this.pokemonB && pokemon.x > 350) pokemon.x -= speed;
     }
-
+    createMoves(pokemonIndex) {
+        this.fightMenuButtons.getChildren().forEach((move, i) => move.text = this.player.pokemon[pokemonIndex].moves[i].name);
+        // this.showPP(pokemonIndex)
+        this.fightMenuButtons.getChildren().forEach((move, i) => {
+            let moveName = this.player.pokemon[pokemonIndex].moves[i].name;
+            move.on('pointerdown', () => {
+                this.ppText.text = 'PP ' + this.player.pokemon[pokemonIndex].moves[i].currentPp + '/' + this.player.pokemon[pokemonIndex].moves[i].pp;
+                this.typeText.text = moves.find((move) => move.ename == moveName).type;;
+            });
+            move.on('pointerup', () => {
+                console.log(moveName + ' selected');
+                this.attack = moveName;
+                return this.attack;
+            })
+        })
+    }
+    pickOpponentMoves() {
+        // choose random move
+    }
+    selectAttacker() {
+        // which pokemon starts the round?
+        // according to speed of their picked moves
+    }
+    calculateDamage(attack, opponent) {
+        // Look for:
+        //      - accuracy: is it going to attack or not?
+        //      - power of the move
+        //      - type of the move: is it weak/strong to the opponent?
+        //          * weak: power/2
+        //          * strong: power*2
+    }
 }
-
-        // this.add.sprite(350, 100, 'pokemonFront', (currentB.id - 1)).setScale(2);
-        // this.add.sprite(120, 190, 'pokemonBack', (currentA.id - 1)).setScale(2);
-
-
-        // function round (pokemonA, pokemonB) {
-        //     let currentA = pokemonA[0];
-        //     let currentB = pokemonB[0];
-        // }
-
-        // function selectPokemon (trainer) {
-        //     let alivePokemon = trainer.pokemon.filter(pokemon => pokemon.hp > 0);
-        //     let selectedPokemon;
-        //     if (trainer === player) {
-        //         if (turn === 0) {
-        //             selectedPokemon = alivePokemon[0];
-        //         }
-        //         else {
-        //             selectedPokemon = pickedPokemon;
-        //         }
-        //     }
-        //     else { 
-        //         let randomNum = Math.floor(Math.random()*alivePokemon.length);
-        //         selectedPokemon = alivePokemon[randomNum];
-        //     }
-        //     return selectedPokemon;
-        // }
-
-        // Get pokemon data
-        // console.log(pokemon.find(poke => poke.id == pokemonNpc.id));
