@@ -1,7 +1,10 @@
 import Phaser from 'phaser';
 import { trainers } from "../data/characters";
-import pokemon from "../data/pokemon.json";
-import moves from "../data/moves.json";
+import POKEMON from "../data/pokemon.json";
+import MOVES from "../data/moves.json";
+import MOVETYPES from "../data/move-types.json";
+import { ADAPTABILITY } from '../data/adaptability';
+import TYPEEFFECTIVENESS from '../data/typeEffectiveness.json';
 
 import battleFont from '../assets/font/battle-font-g.png';
 import battleFontMeta from '../assets/font/battle-font.json';
@@ -28,7 +31,10 @@ export default class battleScene extends Phaser.Scene {
         this.player;
         this.ppText;
         this.typeText;
-        this.attack;
+        this.attackA;
+        this.attackB;
+        this.firstAttacker;
+        this.secondAttacker;
     }
 
     preload() {
@@ -90,7 +96,7 @@ export default class battleScene extends Phaser.Scene {
         this.pokemonB = this.add.sprite(540, 100, 'pokemonFront', (this.currentB.id - 1)).setScale(2);
 
         this.fightBtn.on('pointerup', () => {
-            phase = 'fight menu';
+            phase = 'pick moves';
         })
 
     }
@@ -100,7 +106,7 @@ export default class battleScene extends Phaser.Scene {
             this.pokemonEntrance(this.pokemonA, 2);
             this.pokemonEntrance(this.pokemonB, 2);
         }
-        if (phase === 'fight menu') {
+        if (phase === 'pick moves') {
             this.battleMenu.setVisible(false);
             this.fightBtn.setVisible(false);
             this.bagBtn.setVisible(false);
@@ -111,6 +117,12 @@ export default class battleScene extends Phaser.Scene {
             this.typeText.setVisible(true);
             this.fightMenuButtons.setVisible(true);
             this.createMoves(this.playerPokemonArray.indexOf(this.currentA));
+            this.attackB = this.pickOpponentMoves(this.currentB);
+            phase = 'battle';
+        }
+        if (phase === 'battle') {
+            !!this.attackA &&
+            this.calculateDamage(this.attackA, this.currentA, this.currentB);
         }
     }
 
@@ -126,33 +138,89 @@ export default class battleScene extends Phaser.Scene {
     }
     createMoves(pokemonIndex) {
         this.fightMenuButtons.getChildren().forEach((move, i) => move.text = this.player.pokemon[pokemonIndex].moves[i].name);
-        // this.showPP(pokemonIndex)
         this.fightMenuButtons.getChildren().forEach((move, i) => {
             let moveName = this.player.pokemon[pokemonIndex].moves[i].name;
             move.on('pointerdown', () => {
                 this.ppText.text = 'PP ' + this.player.pokemon[pokemonIndex].moves[i].currentPp + '/' + this.player.pokemon[pokemonIndex].moves[i].pp;
-                this.typeText.text = moves.find((move) => move.ename == moveName).type;;
+                this.typeText.text = MOVES.find((move) => move.ename == moveName).type;
             });
             move.on('pointerup', () => {
-                console.log(moveName + ' selected');
-                this.attack = moveName;
-                return this.attack;
+                this.attackA = moveName;
+                return this.attackA;
             })
         })
     }
-    pickOpponentMoves() {
-        // choose random move
+    pickOpponentMoves(pokemon) {
+        const pickRandom = Math.floor(Math.random()*pokemon.moves.length);
+        const randomMove = pokemon.moves[pickRandom].name;
+        return randomMove;
     }
-    selectAttacker() {
-        // which pokemon starts the round?
-        // according to speed of their picked moves
+    selectAttacker(pokemonA, pokemonB) {
+        const speedPokemonA = POKEMON.find((poke) => poke.name === pokemonA.name).base['Speed'];
+        const speedPokemonB = POKEMON.find((poke) => poke.name === pokemonB.name).base['Speed'];
+        
+        if (speedPokemonA >= speedPokemonB) {
+            this.firstAttacker = pokemonA;
+            this.secondAttacker = pokemonB;
+        } else {
+            this.firstAttacker = pokemonB;
+            this.secondAttacker = pokemonA;
+        }
     }
-    calculateDamage(attack, opponent) {
-        // Look for:
-        //      - accuracy: is it going to attack or not?
-        //      - power of the move
-        //      - type of the move: is it weak/strong to the opponent?
-        //          * weak: power/2
-        //          * strong: power*2
+    calculateDamage(attack, attacker, opponent) {
+        // let hpOpponent = opponent.hp;
+        const move = MOVES.find((move) => attack === move.ename);
+        // const accuracy = move.accuracy;
+        const power = move.power;
+        const attackType = move.type;
+        const physicalMoves = MOVETYPES.find((type) => type.moveType == "Physical").moves;
+        const isPhysical = physicalMoves.includes(move.ename);
+        const attackerBase = POKEMON.find((poke) => poke.name == attacker.name).base;
+        const opponentBase = POKEMON.find((poke) => poke.name == opponent.name).base;
+        const effectiveAttack = isPhysical ? attackerBase["Attack"] : attackerBase["Sp. Attack"];
+        const effectiveDefense = isPhysical ? opponentBase["Defense"] : opponentBase["Sp. Defense"];
+        const attackerLvl = attacker.lvl;
+        
+        const targets = 1;
+        const weather = 1;
+        const random4critical = Math.random();
+        const critical = random4critical >= 0.0625 ? 1 : 2;
+        const randomFactor = (Math.random() * 0.15 + 0.85).toFixed(2);
+        const opponentTypes = POKEMON.find((poke) => poke.name == opponent.name).type;
+        let STAB = 1;
+        if (opponentTypes.includes(attackType)) {
+                if (ADAPTABILITY.includes(opponent.name)) {
+                        STAB = 2;
+                } else {
+                        STAB = 1.5;
+                }
+        }
+        const moveInFxTable =  TYPEEFFECTIVENESS.find((atk) => atk.type === move.type).effectiveness;
+        const effectivenessValues = opponentTypes.map((type) => moveInFxTable[type]);
+        const typeEffectiveness = effectivenessValues.reduce((acc, curr) => acc * curr);
+
+        const burn = 1;
+        const other = 1;
+        const modifier = targets * weather * critical * randomFactor * STAB * typeEffectiveness * burn * other;
+
+        const damage = ((((2 * attackerLvl / 5) + 2) * power * (effectiveAttack / effectiveDefense)) / 50) * modifier;
+        // hpOpponent-= damage;
+        // return hpOpponent;
+        console.log(damage);
+        return damage;
+    }
+    pokemonAttack() {
+        // pokemon animation
+        // calculate new HP
+        // hp bar animation
+    }
+    changeRound() {
+        // round ++
+        // opponent's current hp > 0 ?
+        //      opponents = attacker :
+        //      opponent = dead &&
+        //              opponent pokemonAlive > 0 ?
+        //                  pick next pokemon :
+        //                  opponent loses
     }
 }

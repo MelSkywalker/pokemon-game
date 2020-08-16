@@ -7,6 +7,7 @@ export const trainers =
                     "id": 1,
                     "name": "Bulbasaur",
                     "hp": 45,
+                    "lvl": 10,
                     "moves": [
                         {
                             "name": "Vine Whip",
@@ -19,14 +20,14 @@ export const trainers =
                             "currentPp": 25
                         },
                         {
-                            "name": "Karate Chop",
+                            "name": "Night Shade",
                             "pp": 15,
                             "currentPp": 15
                         },
                         {
-                            "name": "Fire Punch",
-                            "pp": 30,
-                            "currentPp": 30
+                            "name": "Absorb",
+                            "pp": 25,
+                            "currentPp": 25
                         }
                     ] 
                 },
@@ -34,6 +35,7 @@ export const trainers =
                     "id": 2,
                     "name": "Charmander",
                     "hp": 39,
+                    "lvl": 10,
                     "moves": [
                         {
                             "name": "Ember",
@@ -70,6 +72,7 @@ export const trainers =
                     "id": 3,
                     "name": "Squirtle",
                     "hp": 44,
+                    "lvl": 10,
                     "moves": [
                         {
                             "name": "Water Gun",
@@ -89,6 +92,7 @@ export const trainers =
                     "id": 4,
                     "name": "Pikachu",
                     "hp": 35,
+                    "lvl": 10,
                     "moves": [
                         {
                             "name": "Thunder Shock",
@@ -106,27 +110,9 @@ export const trainers =
                 },
                 {
                     "id": 5,
-                    "name": "Gengar",
-                    "hp": 60,
-                    "moves": [
-                        {
-                            "name": "Shadow Ball",
-                            "pp": 15,
-                            "currentPp": 15
-                            
-                        },
-                        {
-                            "name": "Lick",
-                            "pp": 30,
-                            "currentPp": 30
-                            
-                        }
-                    ]
-                },
-                {
-                    "id": 6,
                     "name": "Eevee",
                     "hp": 55,
+                    "lvl": 10,
                     "moves": [
                         {
                             "name": "Rapid Spin",
@@ -138,6 +124,26 @@ export const trainers =
                             "name": "Hidden Power",
                             "pp": 15,
                             "currentPp": 15
+                            
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "name": "Gengar",
+                    "hp": 60,
+                    "lvl": 10,
+                    "moves": [
+                        {
+                            "name": "Shadow Ball",
+                            "pp": 15,
+                            "currentPp": 15
+                            
+                        },
+                        {
+                            "name": "Lick",
+                            "pp": 30,
+                            "currentPp": 30
                             
                         }
                     ]
